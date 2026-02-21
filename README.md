@@ -1,4 +1,4 @@
-## Sandhi: Generative Waveform Reconstruction for Lossy Audio.
+## Sandhi: Generative Waveform Reconstruction for Lossy Audio
 
 ### Why This?
 
@@ -12,8 +12,10 @@ We plan to build a deep learning model that acts like a smart autocorrect for th
 
 
 ## System Architecture
-<img width="2048" height="1117" alt="image" src="https://github.com/user-attachments/assets/2ecf31fc-aab9-49a0-92ac-aa0ff43537a9" />
+<img width="2816" height="1536" alt="Architechture Diagram" src="https://github.com/user-attachments/assets/cf2d9f20-c026-47a6-a7b0-f07e45ea91d1" />
+
 
 
 ## Data Flow
-<img width="2048" height="1117" alt="image" src="https://github.com/user-attachments/assets/51ca8e40-b09f-455b-bec3-609068f574b2" />
+<img width="2816" height="1536" alt="Block Diagram" src="https://github.com/user-attachments/assets/47164626-d34c-4e33-ae57-15d115da6000" />
+
