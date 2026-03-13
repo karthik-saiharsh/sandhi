@@ -1,73 +1,11 @@
-# React + TypeScript + Vite
+# Sandhi: Generative Waveform Reconstruction for Lossy Audio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Why This?
 
-Currently, two official plugins are available:
+Many times when on a networked call and the connection dips for a few moments, it causes the audio to get cut out or sound robotic and cause a glitch. This happens because data packets get lost in transit. Right now, apps like Zoom or WhatsApp handle this in a basic way; they either silence the gap or just replay the last recently received packet of sound to fill the missing parts. This method works for tiny glitches, but if enough data is lost that causes a whole syllable or a word to drop, the audio becomes choppy and hard to understand, forcing everyone to stop and repeat themselves.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This is a very commonly faced problem and one often overlooked. An efficient solution to this can improve the user experience in networked calls and audio transmission applications.
 
-## React Compiler
+We plan to build a deep learning model that acts like a smart autocorrect for these audio gaps. Instead of just replaying old sound, the system analyzes the speech immediately before and after the drop to figure out what should be there. The model then generates the missing waveform, filling in the lost syllable such that it matches the speaker's tone and rhythm. The goal is to make those connection drops seamless, so the conversation keeps flowing even when the network is struggling.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+*(Note: The architecture & flow diagram are referenced in the documentation.)*
