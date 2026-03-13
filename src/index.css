@@ -4,11 +4,12 @@
 
 /* ── Theme Tokens ─────────────────────────────────────────── */
 :root {
-    --bg-main: #0b0f19;
-    --card-bg: #121826;
-    --accent: #6C7CFF;
-    --accent-glow: #00D1FF;
-    --text-primary: #E6EAF2;
+    --bg-main: #0A0F1E;
+    --card-bg: rgba(17, 24, 39, 0.4);
+    /* #111827 base */
+    --accent: #6366F1;
+    --accent-secondary: #22D3EE;
+    --text-primary: #F3F4F6;
     --text-secondary: #9CA3AF;
 
     --spacing-base: 24px;
@@ -44,22 +45,22 @@ body,
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #2d3748;
+    background: rgba(99, 102, 241, 0.4);
     border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #4a5568;
+    background: rgba(99, 102, 241, 0.8);
 }
 
 /* ── Ambient glow ──────────────────────────────────────────── */
 .glow-orb-primary {
     position: fixed;
-    top: -15%;
-    left: 20%;
+    top: -20%;
+    left: 10%;
     width: 50vw;
     height: 50vw;
-    background: radial-gradient(circle, rgba(0, 209, 255, 0.08) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
 }
@@ -70,7 +71,7 @@ body,
     right: -10%;
     width: 60vw;
     height: 60vw;
-    background: radial-gradient(circle, rgba(108, 124, 255, 0.06) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.12) 0%, transparent 60%);
     pointer-events: none;
     z-index: 0;
 }
@@ -80,10 +81,10 @@ body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 1;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 /* ── Animated waveform bars (decorative) ───────────────────── */
@@ -91,8 +92,8 @@ body::before {
 
     0%,
     100% {
-        transform: scaleY(0.2);
-        opacity: 0.3;
+        transform: scaleY(0.1);
+        opacity: 0.2;
     }
 
     50% {
@@ -107,6 +108,7 @@ body::before {
     border-radius: 2px;
     transform-origin: bottom;
     animation: bar-pulse 1.4s ease-in-out infinite;
+    background-color: var(--accent);
 }
 
 /* ── Fade-in animation ─────────────────────────────────────── */
@@ -138,6 +140,26 @@ body::before {
     animation-delay: 0.3s;
 }
 
+/* ── Glass card (Standardized to Prompt) ───────────────────── */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    /* bg-white/5 */
+    backdrop-filter: blur(24px);
+    /* backdrop-blur-xl roughly */
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* border-white/10 */
+    border-radius: 12px;
+    /* rounded-xl */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card:hover {
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 30px rgba(34, 211, 238, 0.1);
+}
+
 /* ── Header Title Glow ─────────────────────────────────────── */
 .title-glow {
     position: relative;
@@ -150,66 +172,29 @@ body::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, rgba(0, 209, 255, 0.15) 0%, transparent 70%);
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
     z-index: -1;
-    filter: blur(20px);
-}
-
-.shimmer-text {
-    background: linear-gradient(90deg, #E6EAF2, var(--accent-glow), #E6EAF2);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 4s linear infinite;
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -200% center;
-    }
-
-    100% {
-        background-position: 200% center;
-    }
-}
-
-/* ── Glass card ────────────────────────────────────────────── */
-.glass-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.glass-card:hover {
-    border-color: rgba(108, 124, 255, 0.15);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 40px rgba(108, 124, 255, 0.05);
+    filter: blur(30px);
 }
 
 /* ── Upload zone ───────────────────────────────────────────── */
 .upload-zone {
-    border: 1px dashed rgba(108, 124, 255, 0.3);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    background: rgba(108, 124, 255, 0.02);
+    background: rgba(255, 255, 255, 0.02);
     transition: all 0.3s ease;
     cursor: pointer;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .upload-zone:hover,
 .upload-zone.drag-active {
-    border-color: var(--accent-glow);
-    background: rgba(108, 124, 255, 0.06);
-    box-shadow: inset 0 0 20px rgba(0, 209, 255, 0.05), 0 0 15px rgba(0, 209, 255, 0.1);
+    border-color: var(--accent-secondary);
+    background: rgba(34, 211, 238, 0.05);
 }
 
-/* ── Controls & Inputs ─────────────────────────────────────── */
+/* ── Custom Range Slider ───────────────────────────────────── */
 .slider-container {
     position: relative;
     width: 100%;
@@ -227,66 +212,76 @@ input[type=range]:focus {
 
 input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
-    height: 4px;
+    height: 6px;
     cursor: pointer;
-    background: rgba(108, 124, 255, 0.2);
-    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
 }
 
 input[type=range]::-webkit-slider-thumb {
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
-    background: var(--accent-glow);
+    background: var(--accent-secondary);
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -6px;
-    box-shadow: 0 0 10px rgba(0, 209, 255, 0.5);
-    transition: transform 0.1s;
-}
-
-input[type=range]::-moz-range-track {
-    width: 100%;
-    height: 4px;
-    cursor: pointer;
-    background: rgba(108, 124, 255, 0.2);
-    border-radius: 2px;
-}
-
-input[type=range]::-moz-range-thumb {
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: var(--accent-glow);
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 0 10px rgba(0, 209, 255, 0.5);
+    margin-top: -7px;
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.6);
+    transition: transform 0.15s;
 }
 
 input[type=range]:hover::-webkit-slider-thumb {
-    transform: scale(1.2);
+    transform: scale(1.15);
 }
 
-/* ── Waveform placeholder ──────────────────────────────────── */
+/* ── Waveform placeholders ─────────────────────────────────── */
 .waveform-bg {
-    background: linear-gradient(180deg, rgba(108, 124, 255, 0.03) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
     border-radius: 8px;
 }
 
 .waveform-loss {
-    background: repeating-linear-gradient(45deg,
-            rgba(239, 68, 68, 0.05),
-            rgba(239, 68, 68, 0.05) 10px,
-            transparent 10px,
-            transparent 20px);
+    background: repeating-linear-gradient(45deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.08) 10px, transparent 10px, transparent 20px);
 }
 
-.tag-pill {
-    background: rgba(108, 124, 255, 0.1);
-    border: 1px solid rgba(108, 124, 255, 0.2);
-    color: var(--accent);
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-family: 'Space Mono', monospace;
-    padding: 2px 10px;
+/* ── Pipeline Animation ────────────────────────────────────── */
+@keyframes flow-dot {
+    0% {
+        left: 0%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+.anim-flow {
+    position: relative;
+    overflow: hidden;
+    height: 2px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1px;
+}
+
+.anim-flow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 100%;
+    background: var(--accent-secondary);
+    box-shadow: 0 0 10px var(--accent-secondary);
+    animation: flow-dot 2s linear infinite;
 }
