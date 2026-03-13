@@ -1,0 +1,63 @@
+# ============================================================
+# Sandhi – Root .gitignore
+# ============================================================
+
+# ── OS / Editor ──────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.code-workspace
+
+# ── Environment / Secrets ────────────────────────────────────
+.env
+.env.*
+!.env.example         # keep the example template
+*.pem
+*.key
+secrets/
+
+# ── Python (shared) ─────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.uv/                  # uv cache / lock meta
+uv.lock               # keep if you want reproducible locks; remove line to track
+
+# ── Model weights & large binary artifacts ──────────────────
+model/weights/
+model/checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+
+# ── Jupyter artefacts ───────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Logs & temp ─────────────────────────────────────────────
+*.log
+logs/
+tmp/
+temp/
+
+# ── Docker ──────────────────────────────────────────────────
+.dockerignore         # usually fine to commit, listed here for reference
+docker-compose.override.yml
