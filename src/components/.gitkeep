@@ -1,0 +1,4 @@
+// WaveformPlayer component – backed by wavesurfer.js
+// Import and use in your pages like:
+//   import WaveformPlayer from "@/components/WaveformPlayer";
+export {};

@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+@import "tailwindcss";
+
+/* ── Theme Tokens ─────────────────────────────────────────── */
+:root {
+    --bg-main: #0A0A0A;
+    --text-primary: #F5F5F7;
+    --text-secondary: #86868B;
+    --accent: #2997FF;
+
+    --spacing-base: 24px;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333336;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #55555A;
+}
+
+/* ── Typography Enhancements ───────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: -0.02em;
+}
+
+/* ── Hero Background Elements ──────────────────────────────── */
+.hero-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: radial-gradient(circle at 50% -20%, rgba(41, 151, 255, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Wave animation (Minimal) ──────────────────────────────── */
+@keyframes minimal-wave {
+
+    0%,
+    100% {
+        height: 10%;
+        opacity: 0.3;
+    }
+
+    50% {
+        height: 100%;
+        opacity: 1;
+    }
+}
+
+.wave-bar {
+    width: 2px;
+    background-color: var(--accent);
+    border-radius: 1px;
+    animation: minimal-wave 1.5s ease-in-out infinite;
+    transform-origin: center;
+}
+
+/* ── Custom Range Slider (Flat) ────────────────────────────── */
+.slider-container {
+    position: relative;
+    width: 100%;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: #333336;
+    border-radius: 2px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -6px;
+    transition: transform 0.2s ease;
+}
+
+input[type=range]:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+/* ── Waveform Track (Flat) ─────────────────────────────────── */
+.waveform-track {
+    border-bottom: 1px solid #333336;
+    position: relative;
+    overflow: hidden;
+    height: 96px;
+    display: flex;
+    align-items: center;
+}
+
+.waveform-loss-overlay {
+    background-color: rgba(255, 59, 48, 0.1);
+}
