@@ -1,89 +1,73 @@
-# Sandhi
+# React + TypeScript + Vite
 
-> **Audio processing application powered by PyTorch + FastAPI + React**
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## Repository Structure
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-```
-sandhi/
-├── model/          # Training & experimentation (do not modify)
-├── backend/        # FastAPI inference server
-├── frontend/       # React + Vite + Tailwind UI
-├── deployment/     # Dockerfile & dev launcher
-└── README.md
-```
+## React Compiler
 
----
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Quick Start (Development)
+## Expanding the ESLint configuration
 
-```bash
-# From the repo root
-chmod +x deployment/start.sh
-./deployment/start.sh
-```
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-| Service  | URL                          |
-|----------|------------------------------|
-| Frontend | http://localhost:5173        |
-| Backend  | http://localhost:8000        |
-| API Docs | http://localhost:8000/docs   |
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
----
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-## Backend (`/backend`)
-
-**Stack:** FastAPI · PyTorch · uvicorn · soundfile
-
-```bash
-cd backend
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
-
-### Wiring in model weights
-
-The inference service (`app/services/inference.py`) automatically adds the sibling
-`model/` directory to `sys.path`. Once you export a trained checkpoint, update
-`WEIGHTS_PATH` in that file and implement the `_load_model()` TODO.
-
----
-
-## Frontend (`/frontend`)
-
-**Stack:** React 19 · Vite · TypeScript · Tailwind CSS v4 · wavesurfer.js
-
-```bash
-cd frontend
-npm install
-npm run dev
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-The Vite dev server proxies `/api/*` requests to `http://localhost:8000` so no
-CORS configuration is needed during development.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
----
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## Docker (Production)
-
-```bash
-# Build from repo root
-docker build -f deployment/Dockerfile -t sandhi .
-
-# Run
-docker run -p 8000:8000 sandhi
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-The container serves the compiled React app as static files from FastAPI, so only
-one port is needed in production.
-
----
-
-## Model Training
-
-See [`model/README.md`](model/README.md) for training instructions. The `model/`
-directory is intentionally kept separate and should **not** be modified by the
-application layer.
