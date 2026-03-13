@@ -1,50 +1,62 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
     return (
-        <section className="flex flex-col items-center text-center pt-24 pb-20 px-6 fade-up relative">
-            <div className="title-glow mb-6">
-                <h1 className="text-6xl md:text-8xl font-extrabold tracking-tighter text-[#F3F4F6]">
+        <section className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden">
+            <div className="hero-gradient"></div>
+
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 30 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="z-10 flex flex-col items-center text-center px-6 max-w-5xl"
+            >
+                <h1 className="text-7xl md:text-9xl font-bold tracking-tighter text-[#F5F5F7] mb-6">
                     Sandhi
                 </h1>
-            </div>
 
-            <h2 className="text-2xl md:text-3xl font-medium text-[#22D3EE] mb-4">
-                AI Reconstruction for Lost Speech Packets
-            </h2>
+                <h2 className="text-2xl md:text-4xl font-semibold text-[#F5F5F7] mb-6 tracking-tight">
+                    AI Reconstruction for <br className="md:hidden" /> Lost Speech Packets
+                </h2>
 
-            <p className="max-w-2xl text-lg md:text-xl text-[#9CA3AF] mb-10 leading-relaxed">
-                Restore missing audio caused by network dropouts using state-of-the-art generative waveform models in real time.
-            </p>
+                <p className="max-w-3xl text-xl md:text-2xl text-[#86868B] mb-12 font-medium leading-relaxed">
+                    Restore missing speech caused by network dropouts using generative waveform models.
+                </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-                <Link
-                    to="/demo"
-                    className="px-8 py-3.5 rounded-xl bg-[#6366F1] hover:bg-[#4F46E5] text-white font-semibold text-lg transition-all shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_30px_rgba(99,102,241,0.6)]"
-                >
-                    Try Demo
-                </Link>
-                <button
-                    className="px-8 py-3.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-[#F3F4F6] font-semibold text-lg transition-colors"
-                >
-                    View Architecture
-                </button>
-            </div>
+                <div className="flex flex-col sm:flex-row items-center gap-6">
+                    <Link
+                        to="/demo"
+                        className="px-8 py-4 rounded-full bg-[#F5F5F7] text-[#0A0A0A] font-semibold text-lg hover:bg-white hover:scale-105 transition-all duration-300"
+                    >
+                        Try Demo
+                    </Link>
+                    <button
+                        className="px-8 py-4 rounded-full bg-transparent border border-[#F5F5F7]/20 text-[#F5F5F7] font-medium text-lg hover:border-[#F5F5F7]/40 transition-colors"
+                    >
+                        View Architecture
+                    </button>
+                </div>
+            </motion.div>
 
-            {/* Decorative Waveform Hero Graphic */}
-            <div className="w-full max-w-4xl mt-20 h-32 flex items-center justify-center gap-1 opacity-40 fade-up fade-up-delay-2">
-                {[...Array(60)].map((_, i) => (
+            {/* ── Minimal Animated Waveform ──────────────────────────────── */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 2 }}
+                className="absolute bottom-16 h-24 w-full flex justify-center items-end gap-[3px] opacity-40 px-6 overflow-hidden"
+            >
+                {[...Array(120)].map((_, i) => (
                     <div
                         key={i}
-                        className="w-1.5 md:w-2 bg-[#6366F1] rounded-full"
+                        className="wave-bar"
                         style={{
-                            height: `${20 + Math.random() * 80}%`,
-                            animation: `bar-pulse ${1 + Math.random()}s ease-in-out infinite`,
-                            animationDelay: `${i * 0.05}s`
+                            animationDelay: `${i * 0.05}s`,
+                            animationDuration: `${1.2 + Math.random()}s`
                         }}
                     />
                 ))}
-            </div>
+            </motion.div>
         </section>
     );
 }

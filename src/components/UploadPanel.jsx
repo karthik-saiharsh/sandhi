@@ -45,19 +45,22 @@ export default function UploadPanel({ onAudioLoaded }) {
     };
 
     return (
-        <section className="glass-card p-6">
-            <h2 className="text-lg font-semibold text-[#F3F4F6] mb-4">
-                Input Source
-            </h2>
+        <section className="w-full mb-12">
+            <div className="flex justify-between items-baseline mb-4">
+                <h2 className="text-xl font-semibold text-[#F5F5F7]">
+                    1. Source Audio
+                </h2>
+                {fileName && <span className="text-[#2997FF] font-medium text-sm">{fileName}</span>}
+            </div>
 
             <div
-                className={`upload-zone w-full py-8 px-4 flex flex-col items-center justify-center mb-4 transition-all duration-300 ${isDragging ? 'drag-active scale-[1.02]' : ''}`}
+                className={`w-full py-12 px-6 flex flex-col items-center justify-center border-2 border-dashed transition-all duration-300 rounded-2xl ${isDragging ? 'border-[#2997FF] bg-[#2997FF]/5' : 'border-[#333336] hover:border-[#55555A]'}`}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
             >
                 <svg
-                    className={`w-10 h-10 mb-3 transition-colors ${isDragging ? 'text-[#22D3EE]' : 'text-[#6366F1]'}`}
+                    className={`w-12 h-12 mb-4 transition-colors ${isDragging ? 'text-[#2997FF]' : 'text-[#86868B]'}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -65,25 +68,16 @@ export default function UploadPanel({ onAudioLoaded }) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                 </svg>
 
-                {fileName ? (
-                    <div className="text-center">
-                        <p className="text-[#22D3EE] font-medium mb-1 truncate max-w-[200px] text-sm">{fileName}</p>
-                        <p className="text-xs text-[#9CA3AF] mb-4">Click below to change file</p>
-                    </div>
-                ) : (
-                    <div className="text-center">
-                        <p className="text-[#F3F4F6] font-medium mb-1 text-sm">
-                            Drag &amp; drop audio
-                        </p>
-                        <p className="text-xs text-[#9CA3AF] mb-4">
-                            WAV, MP3, FLAC (max 10MB)
-                        </p>
-                    </div>
-                )}
+                <p className="text-[#F5F5F7] font-medium mb-2 text-lg">
+                    Drag and drop audio file here
+                </p>
+                <p className="text-sm text-[#86868B] mb-6">
+                    WAV, MP3, or FLAC up to 10MB
+                </p>
 
                 <label className="cursor-pointer">
-                    <span className="bg-[#6366F1]/10 text-[#6366F1] border border-[#6366F1]/30 hover:bg-[#6366F1]/20 hover:border-[#6366F1]/50 hover:text-[#F3F4F6] font-medium py-2 px-5 rounded-lg transition-all inline-block text-xs">
-                        {fileName ? 'Replace File' : 'Browse Files'}
+                    <span className="bg-[#1C1C1E] text-[#F5F5F7] hover:bg-[#2C2C2E] font-medium py-3 px-8 rounded-full transition-colors inline-block text-sm border border-[#333336]">
+                        {fileName ? 'Select Different File' : 'Browse Files'}
                     </span>
                     <input
                         type="file"
@@ -95,18 +89,14 @@ export default function UploadPanel({ onAudioLoaded }) {
             </div>
 
             {error && (
-                <p className="text-red-400 text-xs font-medium mt-2">{error}</p>
+                <p className="text-red-400 text-sm font-medium mt-3">{error}</p>
             )}
 
-            <div className="w-full flex items-center justify-center gap-4 text-[10px] font-mono text-[#9CA3AF] uppercase tracking-wider mt-4">
-                <span className="h-px bg-white/10 flex-1"></span>
-                <span>Or use demo</span>
-                <span className="h-px bg-white/10 flex-1"></span>
+            <div className="mt-4 flex items-center gap-4">
+                <button className="text-[#86868B] hover:text-[#F5F5F7] transition-colors text-sm font-medium underline underline-offset-4">
+                    Use sample audio instead
+                </button>
             </div>
-
-            <button className="w-full mt-3 bg-transparent border border-white/10 text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-white/5 transition-colors text-xs font-medium py-2.5 rounded-lg">
-                Load Sample Audio
-            </button>
         </section>
     );
 }

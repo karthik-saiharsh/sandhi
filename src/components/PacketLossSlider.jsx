@@ -10,15 +10,15 @@ export default function PacketLossSlider({ onLossChange }) {
     };
 
     return (
-        <section className="glass-card p-6">
-            <div className="flex justify-between items-end mb-4">
-                <h2 className="text-lg font-semibold text-[#F3F4F6]">
-                    Packet Loss
+        <section className="w-full mb-12">
+            <div className="flex justify-between items-baseline mb-6">
+                <h2 className="text-xl font-semibold text-[#F5F5F7]">
+                    Simulation Strictness
                 </h2>
-                <span className="text-sm font-mono text-[#22D3EE] font-medium">{lossTarget}%</span>
+                <span className="text-xl font-medium text-[#2997FF]">{lossTarget}% Loss</span>
             </div>
 
-            <div className="slider-container mt-2">
+            <div className="slider-container">
                 <input
                     type="range"
                     min="0"
@@ -27,12 +27,12 @@ export default function PacketLossSlider({ onLossChange }) {
                     value={lossTarget}
                     onChange={handleChange}
                     style={{
-                        background: `linear-gradient(to right, #6366F1 0%, #22D3EE ${lossTarget * 1.66}%, rgba(255, 255, 255, 0.1) ${lossTarget * 1.66}%, rgba(255, 255, 255, 0.1) 100%)`
+                        background: `linear-gradient(to right, #2997FF 0%, #2997FF ${lossTarget * 1.66}%, #333336 ${lossTarget * 1.66}%, #333336 100%)`
                     }}
                 />
             </div>
-            <p className="text-xs text-[#9CA3AF] mt-4 leading-relaxed">
-                Simulate real-world degradation. Model targets optimal reconstruction between 30-60%.
+            <p className="text-sm text-[#86868B] mt-4 leading-relaxed">
+                Adjust the packet drop rate to simulate varying degrees of network congestion.
             </p>
         </section>
     );
