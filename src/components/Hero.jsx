@@ -31,11 +31,12 @@ export default function Hero() {
                     >
                         Try Demo
                     </Link>
-                    <button
+                    <Link
+                        to="/architecture"
                         className="px-8 py-4 rounded-full bg-transparent border border-[#F5F5F7]/20 text-[#F5F5F7] font-medium text-lg hover:border-[#F5F5F7]/40 transition-colors"
                     >
                         View Architecture
-                    </button>
+                    </Link>
                 </div>
             </motion.div>
 
