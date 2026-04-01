@@ -142,6 +142,18 @@ While the current iteration of the project serves as a proof-of-concept for gene
 
 - **Dynamic Burst Loss Handling:** The current training methodology simulates packet loss through randomized, fixed-window masking. Real-world network instability often manifests as unpredictable "burst losses" where consecutive packets drop in varying patterns. Upgrading the preprocessing and masking algorithm to simulate dynamic, burst-loss scenarios will train the model to handle erratic network conditions more effectively.
 
+<img width="2856" height="1566" alt="Screenshot_20260401_125034" src="https://github.com/user-attachments/assets/dd3279c7-ec34-4604-a999-84116225d7e8" />
+
+
+<img width="2856" height="1567" alt="Screenshot_20260401_125143" src="https://github.com/user-attachments/assets/0320aaff-1324-4d63-a87b-237ed64aaab8" />
+
+<img width="2856" height="1567" alt="Screenshot_20260401_125200" src="https://github.com/user-attachments/assets/8daa9333-91f3-4b97-87b0-5a040615f94d" />
+
+
+<img width="2856" height="1567" alt="Screenshot_20260401_125214" src="https://github.com/user-attachments/assets/58fed177-26f4-48b0-88d3-d9ffff9b7295" />
+
+
+
 ---
 
 ### Setup and how to run the project.
